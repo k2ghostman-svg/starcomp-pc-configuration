@@ -1,0 +1,20 @@
+# Byte-compiled / optimized files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Logs
+*.log
+
+# OS & Editor metadata
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Local test scratch crops
+test_*.png
+ref_*.png
+text_crop.png
+rendered_*.png
+exact_sig_box.png
