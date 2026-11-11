@@ -8,7 +8,7 @@
   
   <!-- Vendor Scripts & Styles -->
   <script src="assets/vendor/tailwind.js"></script>
-  <link rel="stylesheet" href="assets/style.css?v=20261111_02">
+  <link rel="stylesheet" href="assets/style.css?v=20261111_04">
   
   <script>
     tailwind.config = {
@@ -35,9 +35,9 @@
   </script>
 
   <!-- Data & PDF Libraries -->
-  <script src="assets/data.js?v=20261111_02"></script>
+  <script src="assets/data.js?v=20261111_04"></script>
   <script src="assets/vendor/html2pdf.bundle.min.js"></script>
-  <script src="assets/app.js?v=20261111_02"></script>
+  <script src="assets/app.js?v=20261111_04"></script>
   <script src="assets/vendor/alpine.min.js" defer></script>
 </head>
 
@@ -49,7 +49,7 @@
       
       <!-- Brand & Title -->
       <div class="flex items-center space-x-2.5">
-        <img src="assets/starcomp_brand_logo.png?v=20261111_02" alt="Starcomp Logo" class="w-8 h-8 rounded-lg object-cover shadow-sm ring-1 ring-orange-500/50">
+        <img src="assets/starcomp_brand_logo.png?v=20261111_04" alt="Starcomp Logo" class="w-8 h-8 rounded-lg object-cover shadow-sm ring-1 ring-orange-500/50">
         <div>
           <div class="flex items-center space-x-1.5 leading-none">
             <span class="font-black text-base tracking-wide text-white">STARCOMP</span>
@@ -455,32 +455,61 @@
           
           <!-- 1. KOP BANNER EXACT IMAGE -->
           <div class="mb-3">
-            <img src="assets/kop_banner.png?v=20261111_02" alt="Starcomp Computer Store" class="w-full object-contain">
+            <img src="assets/kop_banner.png?v=20261111_04" alt="Starcomp Computer Store" class="w-full object-contain">
           </div>
 
-          <!-- 2. SUBHEADER: GREETING & BANK (LEFT) VS NOTA / PENAWARAN BOX (RIGHT) -->
-          <div class="flex justify-between items-start mb-3">
-            
-            <!-- Left: Hello Greeting & BCA Bank Badge -->
-            <div>
-              <h2 class="text-xl font-bold text-black tracking-tight leading-tight">Hello,</h2>
-              <p class="text-xl font-bold text-black tracking-tight leading-tight mb-1" x-text="getGreetingSubtitle()">I'm your Quotation</p>
-              <p class="text-[10px] text-black mb-2">If you have any inquiries, please contact us. Thank You.</p>
-              <div x-show="docType === 'invoice'">
-                <img src="assets/asset_02.png?v=20261111_03" alt="BCA 037-9200-208 a/n CV.STAR MEDIA COMPUTAMA" class="h-6 object-contain">
+          <!-- 2A. SUBHEADER & METADATA BOX: MODE QUOTATION (PENAWARAN / SPH) -->
+          <div x-show="docType === 'penawaran'">
+            <!-- Subheader: Greeting Left vs Unbeatable Prices Right -->
+            <div class="flex justify-between items-start mb-2">
+              <div>
+                <h2 class="text-xl font-bold text-black tracking-tight leading-tight">Hello,</h2>
+                <p class="text-xl font-bold text-black tracking-tight leading-tight mb-1" x-text="getGreetingSubtitle()">I'm your Offering Letter</p>
+                <p class="text-[10px] text-black">If you have any inquiries, please contact us. Thank You.</p>
+              </div>
+              <div class="pt-2">
+                <img src="assets/asset_08.png?v=20261111_04" alt="Unbeatable Prices" class="h-6 object-contain">
               </div>
             </div>
 
-            <!-- Right: Rounded Details Box (Nota/Penawaran, Tanggal, Kasir/Marketing, Pelanggan, Alamat) -->
+            <!-- Metadata Box Horizontal (Exact Match Google Sheet) -->
+            <div class="border-[1.5px] border-black rounded-xl px-4 py-1.5 font-serif text-xs mb-3 bg-white">
+              <div class="flex justify-between items-center font-bold text-black">
+                <div>
+                  <span>No : </span><span class="uppercase" x-text="client.name || docNumber"></span>
+                </div>
+                <div>
+                  <span>Tanggal : </span><span class="uppercase" x-text="getUppercaseDate()"></span>
+                </div>
+                <div>
+                  <span>Hal : Surat Penawaran</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2B. SUBHEADER: MODE INVOICE (GREETING & BCA LEFT VS NOTA DETAILS BOX RIGHT) -->
+          <div x-show="docType === 'invoice'" class="flex justify-between items-start mb-3">
+            <!-- Left: Hello Greeting & BCA Bank Badge -->
+            <div>
+              <h2 class="text-xl font-bold text-black tracking-tight leading-tight">Hello,</h2>
+              <p class="text-xl font-bold text-black tracking-tight leading-tight mb-1" x-text="getGreetingSubtitle()">I'm your Invoice</p>
+              <p class="text-[10px] text-black mb-2">If you have any inquiries, please contact us. Thank You.</p>
+              <div>
+                <img src="assets/asset_02.png?v=20261111_04" alt="BCA 037-9200-208 a/n CV.STAR MEDIA COMPUTAMA" class="h-6 object-contain">
+              </div>
+            </div>
+
+            <!-- Right: Rounded Details Box (Nota, Tanggal, Kasir, Pelanggan, Alamat) -->
             <div class="border-[1.5px] border-black rounded-xl p-2 min-w-[260px] text-xs font-serif leading-relaxed bg-white">
               <div class="grid grid-cols-12 gap-0.5">
-                <span class="col-span-4 font-bold text-black" x-text="docType === 'penawaran' ? 'Penawaran' : 'Nota'"></span>
+                <span class="col-span-4 font-bold text-black">Nota</span>
                 <span class="col-span-8 font-bold text-black" x-text="': ' + docNumber"></span>
                 
                 <span class="col-span-4 font-bold text-black">Tanggal</span>
                 <span class="col-span-8 font-bold text-black" x-text="': ' + getUppercaseDate()"></span>
                 
-                <span class="col-span-4 font-bold text-black" x-text="docType === 'penawaran' ? 'Marketing' : 'Kasir'"></span>
+                <span class="col-span-4 font-bold text-black">Kasir</span>
                 <span class="col-span-8 font-bold text-black" x-text="': ' + (salesName || 'AJI')"></span>
                 
                 <span class="col-span-4 font-bold text-black">Pelanggan</span>
@@ -490,7 +519,6 @@
                 <span class="col-span-8 font-bold text-black uppercase" x-text="': ' + (client.address || 'YOGYAKARTA')"></span>
               </div>
             </div>
-
           </div>
 
           <!-- 3. EXACT TRANSACTION TABLE -->
@@ -543,8 +571,46 @@
             </tbody>
           </table>
 
-          <!-- 4. BOTTOM SECTION: KETERANGAN & HEADQUARTER (LEFT) VS CAP STARCOMP & UNBEATABLE PRICES (RIGHT) -->
-          <div class="flex justify-between items-start text-xs font-serif leading-relaxed mt-3">
+          <!-- 4A. FOOTER MODE QUOTATION (PENAWARAN / SPH): 3-COLUMN SEJAJAR TANPA CAP/TTD -->
+          <div x-show="docType === 'penawaran'" class="border-t-[1.5px] border-black pt-2.5 mt-3">
+            <div class="grid grid-cols-12 gap-3">
+              
+              <!-- Kolom Kiri (col-span-4) -->
+              <div class="col-span-4">
+                <p class="font-bold text-xs uppercase mb-1" style="color: #ed7f33;">KETERANGAN :</p>
+                <div class="font-serif text-[10px] text-black leading-snug space-y-0.5">
+                  <p>* Pembayaran dilakukan secara cash (DP 30% dari total)</p>
+                  <p>&nbsp;&nbsp;atau transfer bank yang dilakukan diawal transaksi.</p>
+                  <p>* Pihak Starcomp bertanggung jawab atas garansi barang</p>
+                </div>
+              </div>
+
+              <!-- Kolom Tengah (col-span-4) -->
+              <div class="col-span-4">
+                <div class="font-serif text-[10px] text-black leading-snug pt-4 space-y-0.5">
+                  <p>* Harga penawaran bisa berubah sewaktu-waktu.</p>
+                  <p>* Penawaran ini berlaku selama 7 hari</p>
+                  <p>* Pihak Starcomp tidak bertanggung jawab atas</p>
+                  <p>&nbsp;&nbsp;software yang ada di PC/Laptop.</p>
+                </div>
+              </div>
+
+              <!-- Kolom Kanan (col-span-4, pl-2 font-sans) -->
+              <div class="col-span-4 pl-2 font-sans">
+                <p class="font-bold text-xs uppercase tracking-wide mb-1" style="color: #ed7f33;">HEADQUARTER</p>
+                <div class="text-[10px] text-black leading-snug space-y-0.5">
+                  <p>Jl. Rajawali No.37, Manukan, Condongcatur,</p>
+                  <p>Kec. Depok, Sleman _Yogyakarta 55582</p>
+                  <p class="font-semibold">a/n CV. STAR MEDIA COMPUTAMA</p>
+                  <p class="font-semibold">: 0811-2747-434</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- 4B. FOOTER MODE INVOICE: CAP & TANDA TANGAN RESMI STARCOMP & UNBEATABLE PRICES -->
+          <div x-show="docType === 'invoice'" class="flex justify-between items-start text-xs font-serif leading-relaxed mt-3">
             
             <!-- Left Column: Keterangan & Headquarter -->
             <div class="w-7/12 space-y-3">
@@ -559,7 +625,6 @@
                   <p>* Sudah termasuk biaya pengiriman (dalam kota)</p>
                   <p>* Pihak Starcomp tidak bertanggung jawab atas</p>
                   <p>&nbsp;&nbsp;software yang ada di PC/Laptop.</p>
-
                 </div>
               </div>
 
@@ -581,9 +646,9 @@
                 <!-- 2. Cap Starcomp berada di bawah tulisan Hormat kami dan tumpang tindih dengan tanda tangan -->
                 <div class="relative w-48 h-20 flex items-center justify-center mt-2 mb-0.5">
                   <!-- Cap / Logo Starcomp (Diposisikan tepat di tengah area tanda tangan, berada di bawah tulisan Hormat kami) -->
-                  <img src="assets/starcomp_logo.png?v=20261111_02" alt="Starcomp Logo" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 opacity-90 object-contain pointer-events-none select-none">
+                  <img src="assets/starcomp_logo.png?v=20261111_04" alt="Starcomp Logo" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 opacity-90 object-contain pointer-events-none select-none">
                   <!-- Tanda Tangan Resmi Starcomp (Tumpang tindih / overlapping langsung di atas Cap) -->
-                  <img src="assets/stamp_ttd.png?v=20261111_02" alt="Signature" class="relative z-10 h-20 object-contain pointer-events-none select-none">
+                  <img src="assets/stamp_ttd.png?v=20261111_04" alt="Signature" class="relative z-10 h-20 object-contain pointer-events-none select-none">
                 </div>
 
                 <!-- 3. Nama Terang tepat di bawah tumpukan cap & tanda tangan -->
@@ -592,7 +657,7 @@
 
               <!-- Bottom Right Dots Grid with Unbeatable Prices -->
               <div class="mt-1 w-full flex justify-end">
-                <img src="assets/asset_08.png?v=20261111_02" alt="Unbeatable Prices" class="h-5 object-contain">
+                <img src="assets/asset_08.png?v=20261111_04" alt="Unbeatable Prices" class="h-5 object-contain">
               </div>
             </div>
 
