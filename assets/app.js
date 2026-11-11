@@ -119,9 +119,9 @@ document.addEventListener('alpine:init', () => {
 
     getGreetingSubtitle() {
       if (this.docType === 'penawaran') {
-        return "I'm your quotation";
+        return "I'm your Quotation";
       } else {
-        return "I'm your invoice";
+        return "I'm your Invoice";
       }
     },
 
