@@ -578,13 +578,13 @@
                 <!-- 1. Tulisan Hormat kami di paling atas -->
                 <p class="font-bold text-xs text-black mb-1">Hormat kami,</p>
                 
-                <!-- 2. Cap Resmi Starcomp -->
-                <div class="flex items-center justify-center my-1">
-                  <img src="assets/starcomp_logo.png" alt="Cap Starcomp" class="w-36 h-auto object-contain pointer-events-none select-none">
+                <!-- 2. Cap Starcomp berada di bawah tulisan Hormat kami dan tumpang tindih dengan tanda tangan -->
+                <div class="relative w-48 h-20 flex items-center justify-center mt-2 mb-0.5">
+                  <!-- Cap / Logo Starcomp (Diposisikan tepat di tengah area tanda tangan, berada di bawah tulisan Hormat kami) -->
+                  <img src="assets/starcomp_logo.png" alt="Starcomp Logo" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 opacity-90 object-contain pointer-events-none select-none">
+                  <!-- Tanda Tangan Resmi Starcomp (Tumpang tindih / overlapping langsung di atas Cap) -->
+                  <img src="assets/stamp_ttd.png" alt="Signature" class="relative z-10 h-20 object-contain pointer-events-none select-none">
                 </div>
-
-                <!-- 3. Teks STARCOMP tepat di bawah cap -->
-                <p class="font-bold text-xs text-black tracking-wider uppercase font-sans">STARCOMP</p>
               </div>
 
               <!-- Bottom Right Dots Grid with Unbeatable Prices -->

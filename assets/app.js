@@ -454,7 +454,7 @@ document.addEventListener('alpine:init', () => {
 
       text += `━━━━━━━━━━━━━━━━━━━━━\n`;
       text += `_Garansi unit resmi distributor, rakitan rapi, cable management, siap pakai._\n`;
-      text += `Hotline / WA: 0812-xxxx-xxxx | Starcomp Gejayan Yogyakarta\n`;
+      text += `Hotline / WA: 0811-2747-434 | Starcomp Rajawali Yogyakarta\n`;
 
       navigator.clipboard.writeText(text).then(() => {
         this.triggerToast('Format WhatsApp berhasil disalin ke clipboard!');
